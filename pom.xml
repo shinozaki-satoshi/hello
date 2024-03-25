@@ -36,31 +36,17 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.5.2</version>
-				<configuration>
-				<finalName>executable_app</finalName>
-				<descriptorRefs>
-					<descriptorRef>jar-with-dependencies</descriptorRef>
-				</descriptorRefs>
-				<appendAssemblyId>false</appendAssemblyId>
-				<archive>
-					<manifest>
-					<mainClass>com.example.hello.HelloApplication</mainClass>
-					</manifest>
-				</archive>
-				</configuration>
-				<executions>
-				<execution>
-					<id>make-assembly</id>
-					<phase>package</phase>
-					<goals>
-					<goal>single</goal>
-					</goals>
-				</execution>
-				</executions>
-			</plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.2</version> <!-- 使用するmaven-jar-pluginのバージョン -->
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>com.example.hello.HelloApplication</mainClass> <!-- ここにメインクラスの完全修飾名を指定 -->
+                    </manifest>
+                </archive>
+            </configuration>
+        	</plugin>
 		</plugins>
 	</build>
 
