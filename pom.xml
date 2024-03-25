@@ -36,6 +36,20 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-jar-plugin</artifactId>
+<configuration>
+  <archive>
+    <manifest>
+      <addClasspath>true</addClasspath>
+      <addExtensions>true</addExtensions>
+      <mainClass>com.example.hello.HelloApplication</mainClass>
+      <classpathPrefix>lib</classpathPrefix>
+    </manifest>
+  </archive>
+</configuration>
+</plugin>
 	</build>
 
 </project>
