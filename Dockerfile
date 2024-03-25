@@ -1,5 +1,5 @@
 # ベースイメージを指定
-FROM adoptopenjdk/openjdk11:alpine-slim
+FROM openjdk:17
 
 # 作業ディレクトリを指定
 WORKDIR /app
