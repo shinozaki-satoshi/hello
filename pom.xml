@@ -37,17 +37,29 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.2</version>
 				<configuration>
+				<finalName>executable_app</finalName>
+				<descriptorRefs>
+					<descriptorRef>jar-with-dependencies</descriptorRef>
+				</descriptorRefs>
+				<appendAssemblyId>false</appendAssemblyId>
 				<archive>
 					<manifest>
-					<addClasspath>true</addClasspath>
-					<addExtensions>true</addExtensions>
 					<mainClass>com.example.hello.HelloApplication</mainClass>
-					<classpathPrefix>lib</classpathPrefix>
 					</manifest>
 				</archive>
 				</configuration>
+				<executions>
+				<execution>
+					<id>make-assembly</id>
+					<phase>package</phase>
+					<goals>
+					<goal>single</goal>
+					</goals>
+				</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
