@@ -22,7 +22,7 @@ public class HelloApplicationController {
     @RequestMapping(value="/index", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String header(Model model) {
         model.addAttribute("msg", "Hello World!!!");
-        return "layout/index";
+        return "index";
     }
     @RequestMapping(value="/layout", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String layout(Model model) {
