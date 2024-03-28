@@ -2,11 +2,11 @@ XHTML
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
  
-<head th:replace="header::head(~{::title})">
+<head th:replace="layout/header::head(~{::title})">
 	<title>書籍管理システム</title>
 </head>
 <body>
-	<header th:replace="header::header"></header>
+	<header th:replace="layout/header::header"></header>
 	<div>
 		<h1>
 		ようこそ！<br>
