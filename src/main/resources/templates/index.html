@@ -5,6 +5,15 @@
 	<title>大喜利</title>
 	<!-- 外部のスタイルシートを読み込む -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+	<style>
+        /* セクションを四角で囲み、背景色を設定する */
+        section {
+            border: 2px solid black;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: lightgray; /* 背景色を指定 */
+        }
+    </style>
 </head>
 <body>
 	<header th:replace="layout/header::header"></header>
