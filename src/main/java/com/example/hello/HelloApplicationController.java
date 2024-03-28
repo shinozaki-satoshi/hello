@@ -14,9 +14,24 @@ public class HelloApplicationController {
         return "hello";
     }
 
-    @RequestMapping(value="/test", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
-    public String test(Model model) {
+    @RequestMapping(value="/content", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    public String content(Model model) {
         model.addAttribute("msg", "Hello World!!!");
         return "layout/content";
+    }
+    @RequestMapping(value="/header", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    public String header(Model model) {
+        model.addAttribute("msg", "Hello World!!!");
+        return "layout/header";
+    }
+    @RequestMapping(value="/layout", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    public String layout(Model model) {
+        model.addAttribute("msg", "Hello World!!!");
+        return "layout/layout";
+    }
+    @RequestMapping(value="/menu", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    public String menu(Model model) {
+        model.addAttribute("msg", "Hello World!!!");
+        return "layout/menu";
     }
 }
