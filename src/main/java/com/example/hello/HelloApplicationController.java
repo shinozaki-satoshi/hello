@@ -17,6 +17,6 @@ public class HelloApplicationController {
     @RequestMapping(value="/test", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String test(Model model) {
         model.addAttribute("msg", "Hello World!!!");
-        return "template";
+        return "test";
     }
 }
