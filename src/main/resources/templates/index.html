@@ -3,15 +3,8 @@
  
 <head th:replace="layout/header::head(~{::title})">
 	<title>大喜利</title>
-	<style>
-        /* セクションを四角で囲む */
-        section {
-            border: 2px solid black;
-            padding: 10px;
-            margin-bottom: 20px;
-			background-color: lightgray; /* 背景色を指定 */
-        }
-    </style>
+	<!-- 外部のスタイルシートを読み込む -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 	<header th:replace="layout/header::header"></header>
