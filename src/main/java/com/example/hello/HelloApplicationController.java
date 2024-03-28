@@ -1,11 +1,12 @@
 package com.example.hello;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RestController
+@Controller
 public class HelloApplicationController {
     @RequestMapping(value="/", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String test(Model model) {
