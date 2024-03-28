@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HelloApplicationController {
     @RequestMapping(value="/", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
-    public String test(Model model) {
+    public String hello(Model model) {
         model.addAttribute("msg", "Hello World!!!");
         return "hello";
     }
 
+    @RequestMapping(value="/test", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    public String test(Model model) {
+        model.addAttribute("msg", "Hello World!!!");
+        return "template";
+    }
 }
