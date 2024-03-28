@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>footer</title>
-</head>
-<body>
-    <div th:fragment="footer" th:remove="tag">
-        <!--/* (1) */-->
-        <p style="text-align: center; background: #e5eCf9;">Copyright &copy; 20XX CompanyName</p>
-    </div>
-</body>
+<footer>
+	<nav layout:fragment="footer" class="footer navbar fixed-bottom">
+		<div>
+			<a>フッター部分</a>
+		</div>
+	</nav>
+</footer>
 </html>
