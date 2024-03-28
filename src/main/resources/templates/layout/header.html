@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/layout}">
-
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+	<meta charset="UTF-8">
+	<title th:replace="${title}">title</title>
+	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script th:src="@{/js/dialog.js}" defer="defer"></script>
 </head>
-
-<body>
-	<nav layout:fragment="header" class="header navbar navbar-fixed-top">
-		<div>
-			<a>ヘッダー部分</a>
-		</div>
-	</nav>
-</body>
+  <body>
+  	<header th:fragment="header">
+		<a th:href="@{/}">ホーム</a>
+		<a th:href="@{/book/list}">検索</a>
+		<a th:href="@{/book/add}">新規登録</a>
+		<hr>
+  	</header>
+  </body>
 </html>

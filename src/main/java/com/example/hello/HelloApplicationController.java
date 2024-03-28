@@ -19,10 +19,10 @@ public class HelloApplicationController {
         model.addAttribute("msg", "Hello World!!!");
         return "layout/content";
     }
-    @RequestMapping(value="/header", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    @RequestMapping(value="/index", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String header(Model model) {
         model.addAttribute("msg", "Hello World!!!");
-        return "layout/header";
+        return "layout/index";
     }
     @RequestMapping(value="/layout", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String layout(Model model) {
