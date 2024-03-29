@@ -4,26 +4,20 @@
 <head th:replace="layout/header::head(~{::title})">
 	<title>大喜利</title>
 	<!-- 外部のスタイルシートを読み込む -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-	<style>
-        /* セクションを四角で囲み、背景色を設定する */
-        section {
-            border: 2px solid black;
-            padding: 10px;
-            margin-bottom: 20px;
-            background-color: lightgray; /* 背景色を指定 */
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" ></link>
+	<link th:href="@{/demo2.css}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" media="all" th:href="@{/css/styles.css}"/>
+	<link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
 </head>
 <body>
 	<header th:replace="layout/header::header"></header>
 	<div>
 		<h1>
 		ようこそ！<br>
-		大喜利サイトへ！
+		大喜利サイトへ！!
 		</h1>
 		<!-- お題1 -->
-		<section>
+		<section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
 			<h2>お題１</h2>
 			<p>受付期限：2024-04-01</p>
 			<button>回答する</button>
