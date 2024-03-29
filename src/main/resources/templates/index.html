@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
  
-<head th:replace="layout/header::head(~{::title})">
-    <title>大喜利</title>
-    <style>
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:replace="${title}">title</title>
+    <style th:inline="text">
         section {
             border: #ff69b4 solid 1px;
             font-size: 100%;
