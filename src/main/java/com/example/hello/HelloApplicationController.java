@@ -7,15 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HelloApplicationController {
-    @RequestMapping(value="/", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    @RequestMapping(value="/hello", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String hello(Model model) {
         model.addAttribute("msg", "Hello World!!!");
         return "hello";
     }
 
-    @RequestMapping(value="/index", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
+    @RequestMapping(value="/", method = RequestMethod.GET)  // ルートへこのメソッドをマップする
     public String header(Model model) {
-        model.addAttribute("msg", "Hello World!!!");
-        return "index";
+        return "home";
     }
 }
