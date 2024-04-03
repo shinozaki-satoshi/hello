@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
-	<meta charset="UTF-8">
-	<title th:replace="${title}">title</title>
+    <meta charset="UTF-8">
+    <title th:replace="${title}">title</title>
 </head>
-  <body>
-  	<header th:fragment="header">
-		<a th:href="@{/}">ホーム</a>
-		<a th:href="@{/book/list}">検索</a>
-		<a th:href="@{/book/add}">新規登録</a>
-		<hr>
-  	</header>
-  </body>
+<body>
+    <header th:fragment="header" style="border: #2219a8 solid 1px; font-size: 100%; padding: 15px; background-color: #f0f0f0;">
+        <a th:href="@{/}">ホーム</a>
+        <a th:href="@{/book/list}">検索</a>
+        <a th:href="@{/book/add}">新規登録</a>
+        <hr>
+    </header>
+</body>
 </html>
