@@ -2,21 +2,15 @@ package com.example.hello.entity;
 
 public class Theme {
 
-    private String id;
     private String themeId;
+
     private String themeName;
+
     private String deadlineFrom;
+
     private String deadlineTo;
 
     // コンストラクタ、getter、setterなどを定義する
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getThemeId() {
         return themeId;
@@ -55,8 +49,7 @@ public class Theme {
     }
 
     // 引数を持つコンストラクタ
-    public Theme(String id, String themeId, String themeName, String deadlineFrom, String deadlineTo) {
-        this.id = id;
+    public Theme(String themeId, String themeName, String deadlineFrom, String deadlineTo) {
         this.themeId = themeId;
         this.themeName = themeName;
         this.deadlineFrom = deadlineFrom;
