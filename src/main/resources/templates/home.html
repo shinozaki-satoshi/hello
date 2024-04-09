@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
- 
 <head th:replace="layout/header::head(~{::title})">
-	<title>大喜利</title>
+    <title>大喜利</title>
 </head>
 <body>
-	<header th:replace="layout/header::header"></header>
-	<div>
-		<h1>
-		ようこそ！<br>
-		大喜利サイトへ！!
-		</h1>
-		<!-- お題1 -->
-		<section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
-			<h2>お題１</h2>
-			<p>受付期限：2024-04-01</p>
-			<button>回答する</button>
-			<button>閲覧する</button>
-		</section>
-	
-		<!-- お題2 -->
-		<section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
-			<h2>お題２</h2>
-			<p>受付期限：2024-04-05</p>
-			<button>回答する</button>
-			<button>閲覧する</button>
-		</section>
-	
-		<!-- お題3 -->
-		<section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
-			<h2>お題３</h2>
-			<p>受付期限：2024-04-10</p>
-			<button>回答する</button>
-			<button>閲覧する</button>
-		</section>
-	</div>
-	<footer th:replace="layout/footer::footer"></footer>
+    <header th:replace="layout/header::header"></header>
+    <div>
+        <h1>ようこそ！<br>大喜利サイトへ！!</h1>
+        <!-- テーマを繰り返し表示する -->
+        <div th:each="theme : ${themes}">
+            <section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
+                <!--<h2 th:text="${theme.themeName}">お題</h2>-->
+                <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
+                <button>回答する</button>
+                <button>閲覧する</button>
+            </section>
+        </div>
+    </div>
+    <footer th:replace="layout/footer::footer"></footer>
 </body>
 </html>
