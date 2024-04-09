@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-  <html xmlns:th="http://www.thymeleaf.org">
-   
-  <head th:replace="layout/header::head(~{::title})">
-    <title>大喜利</title>
-  </head>
-  <body>
-    <header th:replace="layout/header::header"></header>
-    <p th:text="${msg}"></p>
-    <footer th:replace="layout/footer::footer"></footer>
-  </body>
-  </html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>HelloWorld</title>
+</head>
+<body>
+  <p th:text="${msg}"></p>
+</body>
+</html>
