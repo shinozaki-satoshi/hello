@@ -1,0 +1,2 @@
+#SQL接続
+psql postgres://「USER」:「PASS」@dpg-co72rcmd3nmc73e35tog-a.singapore-postgres.render.com/mydb_c9r8
