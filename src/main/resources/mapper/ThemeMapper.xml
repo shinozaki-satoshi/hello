@@ -1,0 +1,9 @@
+<!-- ThemeMapper.xml -->
+
+<mapper namespace="com.example.hello.mapper.ThemeMapper">
+
+    <select id="findAllThemes" resultType="com.example.hello.entity.Theme">
+        SELECT * FROM Theme
+    </select>
+
+</mapper>

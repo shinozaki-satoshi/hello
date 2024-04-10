@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis-config.xml -->
+
 <configuration>
-    <settings>
-        <setting name="lazyLoadingEnabled" value="true" />
-        <setting name="useColumnLabel" value="true" />
-        <setting name="mapUnderscoreToCamelCase" value="false" />
-    </settings>
+
+    <!-- 他の設定 -->
+
+    <mappers>
+        <mapper resource="com/example/hello/mapper/ThemeMapper.xml"/>
+        <!-- 他のマッパーの追加 -->
+    </mappers>
+
 </configuration>
