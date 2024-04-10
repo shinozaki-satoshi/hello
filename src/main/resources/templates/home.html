@@ -13,16 +13,7 @@
 <body>
     <header th:replace="layout/header::header"></header>
     <div>
-        <h1>ようこそ！<br>大喜利サイトへ！!</h1>
-        <!-- テーマを繰り返し表示する -->
-        <div th:each="theme : ${themes}">
-            <section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
-                <h2 th:text="${theme.themeName}">お題</h2>
-                <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
-                <button>回答する</button>
-                <button>閲覧する</button>
-            </section>
-        </div>
+        <h1>ようこそ！大喜利サイトへ！!</h1>
     </div>
     <ul class="list-group" th:each="theme : ${themes}">
         <li class="list-group-item" style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
@@ -31,9 +22,9 @@
             <button>回答する</button>
             <button>閲覧する</button>
         </li>
-      </ul>
+    </ul>
 
-      
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
