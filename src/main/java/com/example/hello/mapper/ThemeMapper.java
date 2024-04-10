@@ -1,25 +1,12 @@
 package com.example.hello.mapper;
 
+import com.example.hello.entity.Theme;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-import com.example.hello.entity.Theme;
+@Mapper
+public interface ThemeMapper {
 
-@Repository
-public class ThemeMapper {
-
-    private final SqlSessionTemplate sqlSessionTemplate;
-
-    @Autowired
-    public ThemeMapper(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
-    }
-
-    public List<Theme> findAllThemes() {
-        return sqlSessionTemplate.selectList("com.example.hello.mapper.ThemeMapper.findAllThemes");
-    }
+    List<Theme> findAllThemes();
 }
