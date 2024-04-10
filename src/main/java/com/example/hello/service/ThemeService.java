@@ -10,11 +10,15 @@ import com.example.hello.mapper.ThemeMapper;
 
 @Service
 public class ThemeService {
+
+    private final ThemeMapper themeMapper;
+
     @Autowired
-    ThemeMapper themeMapper;
+    public ThemeService(ThemeMapper themeMapper) {
+        this.themeMapper = themeMapper;
+    }
 
     public List<Theme> getTheme(){
-        return themeMapper.findAllThemes(); // ThemeMapperを使用してすべてのレコードを取得する
+        return themeMapper.findAllThemes();
     }
-    
 }
