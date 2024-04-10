@@ -1,0 +1,12 @@
+<!-- mybatis-config.xml -->
+
+<configuration>
+
+    <!-- 他の設定 -->
+
+    <mappers>
+        <mapper resource="com/example/hello/mapper/ThemeMapper.xml"/>
+        <!-- 他のマッパーの追加 -->
+    </mappers>
+
+</configuration>

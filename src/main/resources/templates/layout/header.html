@@ -3,13 +3,35 @@
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <title th:replace="${title}">title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <header th:fragment="header" style="background-color: #f0f0f0;">
-        <a th:href="@{/}">ホーム</a>
-        <a th:href="@{/book/list}">検索</a>
-        <a th:href="@{/book/add}">新規登録</a>
-        <hr>
-    </header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" th:fragment="header" style="background-color: #f0f0f0;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" th:href="@{/home}">ホーム</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/add}">新規登録</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 </body>
 </html>
