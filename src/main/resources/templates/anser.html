@@ -17,25 +17,24 @@
     <div>
         <!-- テーマを表示する -->
         <section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
-            <h2>お題</h2>
-            <p>受付期限</p>
+            <h2 th:text="${theme.themeName}">お題</h2>
+            <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
         </section>
     </div>
     <!-- 回答を表示する -->
-    <ul class="list-group" th:each="theme : ${themes}">
-        <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <input type="text" class="form-control" name="theme" placeholder="回答">
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-primary">戻る</button>
-                    <button class="btn btn-secondary">クリア</button>
-                    <button class="btn btn-success">送信</button>
-                </div>
+    <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" name="anser" placeholder="回答">
             </div>
-        </li>
-    </ul>
+            <div class="col-md-6">
+                <button class="btn btn-primary">戻る</button>
+                <button class="btn btn-secondary">クリア</button>
+                <button class="btn btn-success">送信</button>
+            </div>
+        </div>
+    </li>
+
 
 
 
