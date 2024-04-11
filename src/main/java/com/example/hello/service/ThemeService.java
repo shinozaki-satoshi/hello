@@ -25,4 +25,8 @@ public class ThemeService {
     public Theme getTheme(Integer themeId){
         return themeMapper.getTheme(themeId);
     }
+    
+    public Void registerTheme(Integer themeId, String anser){
+        return themeMapper.registerTheme(themeId, anser);
+    }
 }

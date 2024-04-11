@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/header::head(~{::title})">
+<head th:replace="~{layout/header::head(~{::title})}">
     <title>大喜利</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,27 +13,32 @@
 </head>
 
 <body>
-    <header th:replace="layout/header::header"></header>
+    <header th:replace="~{layout/header::header}"></header>
     <div>
         <!-- テーマを表示する -->
         <section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
-            <h2>お題</h2>
-            <p>受付期限</p>
+            <h2 th:text="${theme.themeName}">お題</h2>
+            <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
         </section>
     </div>
     <!-- 回答を表示する -->
-    <ul class="list-group" th:each="theme : ${themes}">
-        <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <h5>回答 </h5>
-                <div class="col-md-6">
-                    <button class="btn btn-primary">戻る</button>
-                    <button class="btn btn-success">送信</button>
-                </div>
+    <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+        <div class="row">
+            <div class="col-md-12">
+                <form th:action="@{'/anser_finish/' + ${theme.themeId}}" method="POST">
+                    <div style="border: 1px solid #ced4da; padding: .375rem .75rem;">
+                        <p th:text="${anser}">回答</p>
+                    </div>
+                
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary">戻る</button>
+                        <button type="submit" class="btn btn-success">送信</button>
+                    </div>
+                </form>
             </div>
-        </li>
-    </ul>
+        </div>
+    </li>
+
 
 
 
@@ -41,7 +46,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
-    <footer th:replace="layout/footer::footer"></footer>
+    <footer th:replace="~{layout/footer::footer}"></footer>
 </body>
 
 </html>

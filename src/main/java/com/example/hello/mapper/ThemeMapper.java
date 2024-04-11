@@ -10,4 +10,6 @@ public interface ThemeMapper {
 
     List<Theme> findAllThemes();
     Theme getTheme(Integer themeId);
+    Void registerTheme(Integer themeId, String anser);
+
 }
