@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/header::head(~{::title})">
-    <title>大喜利</title>
+<head th:replace="~{layout/header::head(~{::title})}">
+    <title>大喜利</title>>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header th:replace="layout/header::header"></header>
+    <header th:replace="~{layout/header::header}"></header>
     <div>
         <!-- テーマを表示する -->
         <section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
@@ -23,14 +23,17 @@
     </div>
     <!-- 回答を表示する -->
     <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+        <!-- HTML -->
         <div class="row">
             <div class="col-md-12">
-                <input type="text" class="form-control" name="anser" placeholder="回答">
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-primary">戻る</button>
-                <button class="btn btn-secondary">クリア</button>
-                <button class="btn btn-success">送信</button>
+                <form th:action="@{'/anser_confirm/' + ${theme.themeId}}" method="POST">
+                    <input type="text" class="form-control" name="anser" placeholder="回答">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary">戻る</button>
+                        <button type="reset" class="btn btn-secondary">クリア</button>
+                        <button type="submit" class="btn btn-success">決定</button>
+                    </div>
+                </form>
             </div>
         </div>
     </li>
@@ -42,7 +45,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
-    <footer th:replace="layout/footer::footer"></footer>
+    <footer th:replace="~{layout/footer::footer}"></footer>
 </body>
 
 </html>
