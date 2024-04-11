@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ThemeMapper {
 
     List<Theme> findAllThemes();
+    Theme getTheme(Integer themeId);
 }
