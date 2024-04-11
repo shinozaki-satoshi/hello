@@ -18,7 +18,11 @@ public class ThemeService {
         this.themeMapper = themeMapper;
     }
 
-    public List<Theme> getTheme(){
+    public List<Theme> getAllTheme(){
         return themeMapper.findAllThemes();
+    }
+
+    public Theme getTheme(Integer themeId){
+        return themeMapper.getTheme(themeId);
     }
 }

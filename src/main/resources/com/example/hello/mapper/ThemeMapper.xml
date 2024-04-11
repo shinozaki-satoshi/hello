@@ -6,5 +6,9 @@
     <select id="findAllThemes" resultType="com.example.hello.entity.Theme">
         SELECT * FROM Theme
     </select>
+    <select id="getTheme" resultType="com.example.hello.entity.Theme">
+        SELECT * FROM Theme WHERE theme_id= #{themeId}
+    </select>
+
 
 </mapper>

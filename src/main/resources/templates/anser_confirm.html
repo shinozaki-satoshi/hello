@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="layout/header::head(~{::title})">
     <title>大喜利</title>
     <!-- Required meta tags -->
@@ -10,21 +11,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+
 <body>
     <header th:replace="layout/header::header"></header>
     <div>
-        <h1>ようこそ！大喜利サイトへ！!</h1>
+        <!-- テーマを表示する -->
+        <section style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
+            <h2>お題</h2>
+            <p>受付期限</p>
+        </section>
     </div>
+    <!-- 回答を表示する -->
     <ul class="list-group" th:each="theme : ${themes}">
-        <li class="list-group-item" style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
-            <h2 th:text="${theme.themeName}">お題</h2>
-            <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
-            <a th:href="@{'/anser/' + ${theme.themeId}}">
-                <button>回答する</button>
-            </a>
-            <button>閲覧する</button>
+        <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>回答 </h5>
+                <div class="col-md-6">
+                    <button class="btn btn-primary">戻る</button>
+                    <button class="btn btn-success">送信</button>
+                </div>
+            </div>
         </li>
     </ul>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -32,4 +43,5 @@
         crossorigin="anonymous"></script>
     <footer th:replace="layout/footer::footer"></footer>
 </body>
+
 </html>
