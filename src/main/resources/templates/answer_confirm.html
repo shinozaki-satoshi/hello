@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layout/header::head(~{::title})}">
-    <title>大喜利</title>>
+    <title>大喜利</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,16 +23,16 @@
     </div>
     <!-- 回答を表示する -->
     <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
-        <!-- HTML -->
         <div class="row">
             <div class="col-md-12">
-                <form th:action="@{'/anser_confirm/' + ${theme.themeId}}" method="POST">
-                    <input type="text" class="form-control" name="anser" placeholder="回答" th:value="${anser}" th:unless="${anser == null}">
-                    <input type="text" class="form-control" name="anser" placeholder="回答" th:if="${anser == null}">
+                <form th:action="@{'/answer_finish/' + ${theme.themeId}}" method="POST">
+                    <div style="border: 1px solid #ced4da; padding: .375rem .75rem;">
+                        <p th:text="${answer}">回答</p>
+                    </div>
+                
                     <div class="col-md-6">
-                        <a th:href="@{/home}" class="btn btn-primary">戻る</a>
-                        <button type="reset" class="btn btn-secondary">クリア</button>
-                        <button type="submit" class="btn btn-success">決定</button>
+                        <a th:href="@{'/answer_back/' + ${theme.themeId}}" class="btn btn-primary">戻る</a>
+                        <button type="submit" class="btn btn-success">送信</button>
                     </div>
                 </form>
             </div>
