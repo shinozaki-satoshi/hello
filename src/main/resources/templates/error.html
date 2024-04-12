@@ -6,7 +6,8 @@
 </head>
 <body>
   <header th:replace="~{layout/header::header}"></header>
-  <p >エラーが発生しました。ホームへお戻りください</p>
+  <p th:text="${errorMessage}"></p>
+  <p>エラーが発生しました。ホームへお戻りください</p>
   <footer th:replace="~{layout/footer::footer}"></footer>
 </body>
 </html>

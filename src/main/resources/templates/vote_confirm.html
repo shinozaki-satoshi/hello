@@ -23,16 +23,16 @@
     </div>
 
     <!-- 回答を表示する -->
-    <ul class="list-group" th:each="answerA : ${answers}">
-        <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
-            <h2 th:text="${answerA.answer}">回答</h2>
-            <p th:text="'回答日：' + ${answerA.time}">回答日</p>
-            <a th:href="@{'/vote_confirm/' + ${answerA.answerId}}">
-                <button>投票する</button>
-            </a>
-        </li>
-    </ul>
-
+    <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+        <h2 th:text="${answer.answer}">回答</h2>
+        <p th:text="'回答日：' + ${answer.time}">回答日</p>
+        <div class="col-md-6">
+            <form th:action="@{'/vote_finish/' + ${answer.answerId}}" method="POST">
+                <a th:href="@{'/vote/' + ${theme.themeId}}" class="btn btn-primary">戻る</a>
+                <button type="submit" class="btn btn-success">投票確定</button>
+            </form>
+        </div>
+    </li>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
