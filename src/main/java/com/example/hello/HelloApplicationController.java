@@ -28,13 +28,13 @@ public class HelloApplicationController {
     AnswerService AnswerService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello(Model model) {
+    public String hello(HttpSession session,Model model) {
         model.addAttribute("msg", "Hello World!!!");
         return "hello";
     }
 
     @RequestMapping(value = "/theme", method = RequestMethod.GET)
-    public String home(Model model) {
+    public String home(HttpSession session, Model model) {
         return "theme";
     }
 
@@ -44,7 +44,7 @@ public class HelloApplicationController {
         model.addAttribute("themes", themes);
 
         // セッションを破棄する
-        session.invalidate();
+        //session.invalidate();
 
         return "home";
     }
@@ -99,7 +99,7 @@ public class HelloApplicationController {
     */
 
     /* 
-    投票画面群 
+     投票画面群 
     */
     @RequestMapping(value = "/vote/{themeId}", method = RequestMethod.GET)
     public String vote(HttpSession session, @PathVariable("themeId") String themeId, Model model) {
