@@ -90,7 +90,7 @@ public class HelloApplicationController {
         AnswerService.registerAnswer(Integer.parseInt(themeId), sessionAnser);
 
         // セッションを破棄する
-        session.invalidate();
+        //session.invalidate();
 
         return "finish";
     }
@@ -129,7 +129,7 @@ public class HelloApplicationController {
         AnswerService.voteAnswer(Integer.parseInt(answerId));
 
         // セッションを破棄する
-        session.invalidate();
+        //session.invalidate();
 
         return "finish";
     }
