@@ -6,10 +6,12 @@ import com.example.hello.entity.Answer;
 import com.example.hello.entity.Theme;
 import com.example.hello.service.AnswerService;
 import com.example.hello.service.ThemeService;
+import com.example.hello.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,9 +29,16 @@ public class HelloApplicationController {
     @Autowired
     AnswerService AnswerService;
 
+    @Autowired
+    UserService UserService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(HttpSession session,Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         model.addAttribute("msg", "Hello World!!!");
+        
         return "hello";
     }
 
@@ -39,7 +48,10 @@ public class HelloApplicationController {
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String theme(HttpSession session, Model model) {
+    public String theme(HttpSession session, Model model, String username) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         List<Theme> themes = ThemeService.getAllTheme();
         model.addAttribute("themes", themes);
 
@@ -54,6 +66,9 @@ public class HelloApplicationController {
     */
     @RequestMapping(value = "/answer/{themeId}", method = RequestMethod.GET)
     public String answer(HttpSession session, @PathVariable("themeId") String themeId, Model model, RedirectAttributes redirectAttributes) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
 

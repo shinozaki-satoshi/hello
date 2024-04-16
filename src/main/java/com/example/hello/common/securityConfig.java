@@ -22,15 +22,19 @@ public class securityConfig  {
     protected SecurityFilterChain SecurityChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests()
+            .requestMatchers("/registUser").permitAll()
+            .requestMatchers("/registUserSuc").permitAll()
             .anyRequest()
             .authenticated();
         http
-            .formLogin()
-            .defaultSuccessUrl("/home",true)
-            .permitAll();
+            .formLogin().permitAll()
+            .loginPage("/login")
+            .defaultSuccessUrl("/home",true);
         http
             .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+        http
+            .logout().permitAll();
         return http.build();
     }
 

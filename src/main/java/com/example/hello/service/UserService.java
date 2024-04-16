@@ -1,13 +1,18 @@
 package com.example.hello.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.hello.entity.Account;
 import com.example.hello.mapper.AccountMapper;
+
+import org.springframework.ui.Model;
 
 @Component
 public class UserService implements UserDetailsService{
@@ -23,5 +28,18 @@ public class UserService implements UserDetailsService{
         }
     
        return accountMapper.selectByUsername(username);
+    }
+
+    public void registUser(String username, String passWard){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        Account account = new Account(username, encoder.encode(passWard));
+        accountMapper.registUser(account);
+    }
+
+    //ログインユーザーを表示させるためのやつ
+    public Model getUser(Model model){
+        final String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("username", name);
+        return model;
     }
 }

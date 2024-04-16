@@ -5,4 +5,7 @@
     <select id="selectByUsername" resultType="com.example.hello.entity.Account">
         SELECT * FROM account where user_name = #{username};
     </select>
+    <insert id="registUser" parameterType="com.example.hello.entity.Account">
+        INSERT INTO account(user_name,pass_word) VALUES (#{username}, #{passWard});
+    </insert>
 </mapper>
