@@ -11,7 +11,6 @@ import com.example.hello.service.UserService;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -82,6 +81,9 @@ public class HelloApplicationController {
     @RequestMapping(value = "/answer_confirm/{themeId}", method = RequestMethod.POST)
     public String answer_confirm(HttpSession session, @PathVariable("themeId") String themeId,
             @RequestParam("answer") String answer, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
         model.addAttribute("answer", answer);
@@ -91,7 +93,10 @@ public class HelloApplicationController {
 
     @RequestMapping(value = "/answer_back/{themeId}", method = RequestMethod.GET)
     public String answer_back(HttpSession session, @PathVariable("themeId") String themeId,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         redirectAttributes.addFlashAttribute("theme", theme);
         return "redirect:/answer/{themeId}";
@@ -100,6 +105,8 @@ public class HelloApplicationController {
     @RequestMapping(value = "/answer_finish/{themeId}", method = RequestMethod.POST)
     public String answer_finish(HttpSession session, @PathVariable("themeId") String themeId, Model model) {
         String sessionAnser = (String) session.getAttribute("answer");
+        //ユーザーセット
+        UserService.getUser(model);
 
         // 回答登録
         AnswerService.registerAnswer(Integer.parseInt(themeId), sessionAnser);
@@ -118,6 +125,9 @@ public class HelloApplicationController {
     */
     @RequestMapping(value = "/vote/{themeId}", method = RequestMethod.GET)
     public String vote(HttpSession session, @PathVariable("themeId") String themeId, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
 
@@ -129,6 +139,9 @@ public class HelloApplicationController {
 
     @RequestMapping(value = "/vote_confirm/{answerId}", method = RequestMethod.GET)
     public String vote_confirm(HttpSession session, @PathVariable("answerId") String answerId, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
         Answer answer = AnswerService.getAnswer(Integer.parseInt(answerId));
         model.addAttribute("answer", answer);
 
@@ -139,7 +152,9 @@ public class HelloApplicationController {
 
     @RequestMapping(value = "/vote_finish/{answerId}", method = RequestMethod.POST)
     public String vote_finish(HttpSession session, @PathVariable("answerId") String answerId, Model model) {
-
+        //ユーザーセット
+        UserService.getUser(model);
+        
         // 投票登録
         AnswerService.voteAnswer(Integer.parseInt(answerId));
 

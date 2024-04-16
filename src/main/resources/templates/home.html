@@ -13,9 +13,9 @@
 </head>
 
 <body>
-    <header th:replace="~{layout/header::header}"></header>
-    <div>
-        <h1>ようこそ！大喜利サイトへ！!</h1>
+    <header th:replace="~{layout/header::header}" ></header>
+    <div  style="margin-top: 80px;">
+        <h1>お題一覧</h1>
     </div>
     <ul class="list-group" th:each="theme : ${themes}">
         <li class="list-group-item" style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">

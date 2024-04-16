@@ -14,8 +14,8 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
-    <a class="navbar-brand" th:text="${username}">Navbar</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header" style="position: fixed; top: 0; left: 10; width: 100%; background-color: #333; color: #fff; padding: 10px 0 10px 10px; z-index: 1000;">
+    <p class="navbar-brand" th:text="${username}">Navbar</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
