@@ -6,6 +6,7 @@ import com.example.hello.entity.Answer;
 import com.example.hello.entity.Theme;
 import com.example.hello.service.AnswerService;
 import com.example.hello.service.ThemeService;
+import com.example.hello.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -27,24 +28,34 @@ public class HelloApplicationController {
     @Autowired
     AnswerService AnswerService;
 
+    @Autowired
+    UserService UserService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello(Model model) {
+    public String hello(HttpSession session,Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         model.addAttribute("msg", "Hello World!!!");
+        
         return "hello";
     }
 
     @RequestMapping(value = "/theme", method = RequestMethod.GET)
-    public String home(Model model) {
+    public String home(HttpSession session, Model model) {
         return "theme";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String theme(HttpSession session, Model model) {
+    public String theme(HttpSession session, Model model, String username) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         List<Theme> themes = ThemeService.getAllTheme();
         model.addAttribute("themes", themes);
 
         // セッションを破棄する
-        session.invalidate();
+        //session.invalidate();
 
         return "home";
     }
@@ -54,6 +65,9 @@ public class HelloApplicationController {
     */
     @RequestMapping(value = "/answer/{themeId}", method = RequestMethod.GET)
     public String answer(HttpSession session, @PathVariable("themeId") String themeId, Model model, RedirectAttributes redirectAttributes) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
 
@@ -67,6 +81,9 @@ public class HelloApplicationController {
     @RequestMapping(value = "/answer_confirm/{themeId}", method = RequestMethod.POST)
     public String answer_confirm(HttpSession session, @PathVariable("themeId") String themeId,
             @RequestParam("answer") String answer, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
         model.addAttribute("answer", answer);
@@ -76,7 +93,10 @@ public class HelloApplicationController {
 
     @RequestMapping(value = "/answer_back/{themeId}", method = RequestMethod.GET)
     public String answer_back(HttpSession session, @PathVariable("themeId") String themeId,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         redirectAttributes.addFlashAttribute("theme", theme);
         return "redirect:/answer/{themeId}";
@@ -85,12 +105,14 @@ public class HelloApplicationController {
     @RequestMapping(value = "/answer_finish/{themeId}", method = RequestMethod.POST)
     public String answer_finish(HttpSession session, @PathVariable("themeId") String themeId, Model model) {
         String sessionAnser = (String) session.getAttribute("answer");
+        //ユーザーセット
+        UserService.getUser(model);
 
         // 回答登録
         AnswerService.registerAnswer(Integer.parseInt(themeId), sessionAnser);
 
         // セッションを破棄する
-        session.invalidate();
+        //session.invalidate();
 
         return "finish";
     }
@@ -99,10 +121,13 @@ public class HelloApplicationController {
     */
 
     /* 
-    投票画面群 
+     投票画面群 
     */
     @RequestMapping(value = "/vote/{themeId}", method = RequestMethod.GET)
     public String vote(HttpSession session, @PathVariable("themeId") String themeId, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
 
@@ -114,6 +139,9 @@ public class HelloApplicationController {
 
     @RequestMapping(value = "/vote_confirm/{answerId}", method = RequestMethod.GET)
     public String vote_confirm(HttpSession session, @PathVariable("answerId") String answerId, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
         Answer answer = AnswerService.getAnswer(Integer.parseInt(answerId));
         model.addAttribute("answer", answer);
 
@@ -124,12 +152,14 @@ public class HelloApplicationController {
 
     @RequestMapping(value = "/vote_finish/{answerId}", method = RequestMethod.POST)
     public String vote_finish(HttpSession session, @PathVariable("answerId") String answerId, Model model) {
-
+        //ユーザーセット
+        UserService.getUser(model);
+        
         // 投票登録
         AnswerService.voteAnswer(Integer.parseInt(answerId));
 
         // セッションを破棄する
-        session.invalidate();
+        //session.invalidate();
 
         return "finish";
     }

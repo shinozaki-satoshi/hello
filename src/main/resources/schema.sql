@@ -15,3 +15,10 @@ create table answer (
   , theme_id integer
   , primary key (answer_id)
 );
+
+DROP TABLE IF EXISTS account;
+CREATE TABLE account (
+   user_name VARCHAR(20) NOT NULL
+ , pass_word VARCHAR(100) NOT NULL
+ , primary key (user_name)
+);
