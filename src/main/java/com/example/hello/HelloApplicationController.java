@@ -72,7 +72,7 @@ public class HelloApplicationController {
         model.addAttribute("theme", theme);
 
         //戻るボタン時に格納
-        String answer = (String) session.getAttribute("answer");
+        String answer = (String) session.getAttribute("sessionAnser");
         model.addAttribute("answer", answer); 
 
         return "answer";
@@ -87,7 +87,7 @@ public class HelloApplicationController {
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
         model.addAttribute("answer", answer);
-        session.setAttribute("answer", answer);
+        session.setAttribute("sessionAnser", answer);
         return "answer_confirm";
     }
 
@@ -104,7 +104,7 @@ public class HelloApplicationController {
 
     @RequestMapping(value = "/answer_finish/{themeId}", method = RequestMethod.POST)
     public String answer_finish(HttpSession session, @PathVariable("themeId") String themeId, Model model) {
-        String sessionAnser = (String) session.getAttribute("answer");
+        String sessionAnser = (String) session.getAttribute("sessionAnser");
         //ユーザーセット
         UserService.getUser(model);
 
@@ -112,8 +112,7 @@ public class HelloApplicationController {
         AnswerService.registerAnswer(Integer.parseInt(themeId), sessionAnser);
 
         // セッションを破棄する
-        //session.invalidate();
-
+        session.removeAttribute("sessionAnser");
         return "finish";
     }
     /* 
@@ -159,7 +158,7 @@ public class HelloApplicationController {
         AnswerService.voteAnswer(Integer.parseInt(answerId));
 
         // セッションを破棄する
-        //session.invalidate();
+        session.removeAttribute("sessionAnser");
 
         return "finish";
     }
