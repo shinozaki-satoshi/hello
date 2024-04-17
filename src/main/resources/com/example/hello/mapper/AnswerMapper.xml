@@ -11,7 +11,8 @@
     <select id="getAnswer" resultType="com.example.hello.entity.Answer">
         SELECT * FROM answer WHERE answer_id = #{answerId};
     </select>
-    <select id="voteAnswer" resultType="com.example.hello.entity.Answer">
+
+    <insert id="voteAnswer" parameterType="com.example.hello.entity.Answer">
         UPDATE answer SET vote_num = vote_num + 1 WHERE answer_id = #{answerId};
-    </select>
+    </insert>
 </mapper>

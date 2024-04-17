@@ -11,5 +11,4 @@ public interface AnswerMapper {
     Void registerTheme(Integer themeId, String answer);
     List<Answer> getAnswers(Integer themeId);
     Answer getAnswer (Integer answerId);
-    Void voteAnswer(Integer answerId);
 }

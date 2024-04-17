@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS vote;
+
 DROP TABLE IF EXISTS Theme;
 CREATE TABLE Theme (
   theme_id SERIAL PRIMARY KEY,
@@ -7,18 +9,30 @@ CREATE TABLE Theme (
 );
 
 DROP TABLE IF EXISTS answer;
-create table answer (
-  answer_id serial not null
-  , answer text not null
-  , vote_num integer default 0
-  , time timestamp(6) without time zone default CURRENT_TIMESTAMP
-  , theme_id integer
-  , primary key (answer_id)
+CREATE TABLE answer (
+  answer_id SERIAL NOT NULL,
+  answer TEXT NOT NULL,
+  time TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  theme_id INTEGER,
+  user_id INTEGER, -- ユーザーID列を追加
+  PRIMARY KEY (answer_id)
 );
 
 DROP TABLE IF EXISTS account;
 CREATE TABLE account (
-   user_name VARCHAR(20) NOT NULL
+ user_name VARCHAR(20) NOT NULL
  , pass_word VARCHAR(100) NOT NULL
  , primary key (user_name)
+);
+
+
+CREATE TABLE vote (
+  user_name VARCHAR(20),
+  theme_id INTEGER,
+  answer_id INTEGER,
+  time TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (theme_id, user_name),
+  FOREIGN KEY (theme_id) REFERENCES theme(theme_id),
+  FOREIGN KEY (user_name) REFERENCES account(user_name),
+  FOREIGN KEY (answer_id) REFERENCES answer(answer_id)
 );

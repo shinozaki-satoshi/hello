@@ -11,12 +11,8 @@ import com.example.hello.mapper.ThemeMapper;
 @Service
 public class ThemeService {
 
-    private final ThemeMapper themeMapper;
-
     @Autowired
-    public ThemeService(ThemeMapper themeMapper) {
-        this.themeMapper = themeMapper;
-    }
+    ThemeMapper themeMapper;
 
     public List<Theme> getAllTheme(){
         return themeMapper.findAllThemes();

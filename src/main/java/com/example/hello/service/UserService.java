@@ -42,4 +42,10 @@ public class UserService implements UserDetailsService{
         model.addAttribute("username", name);
         return model;
     }
+
+    public String getUserName(){
+        final String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return name;
+    }
+
 }

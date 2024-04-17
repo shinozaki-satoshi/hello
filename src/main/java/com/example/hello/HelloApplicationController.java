@@ -7,6 +7,7 @@ import com.example.hello.entity.Theme;
 import com.example.hello.service.AnswerService;
 import com.example.hello.service.ThemeService;
 import com.example.hello.service.UserService;
+import com.example.hello.service.VoteService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -30,6 +31,9 @@ public class HelloApplicationController {
 
     @Autowired
     UserService UserService;
+
+    @Autowired
+    VoteService VoteService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(HttpSession session,Model model) {
@@ -153,9 +157,18 @@ public class HelloApplicationController {
     public String vote_finish(HttpSession session, @PathVariable("answerId") String answerId, Model model) {
         //ユーザーセット
         UserService.getUser(model);
+
+        // ユーザー取得
+        String userName = UserService.getUserName();
+
+        // 回答ID取得
+        Integer answerIdInt = Integer.parseInt(answerId);
         
-        // 投票登録
-        AnswerService.voteAnswer(Integer.parseInt(answerId));
+        // 投票テーマID取得
+        Integer themeIdInt = Integer.parseInt(AnswerService.getAnswer(answerIdInt).getThemeId());
+
+        // 投票登録(ユーザ、テーマ、アンサーID)
+        VoteService.voteAnswer(userName,themeIdInt,answerIdInt);
 
         // セッションを破棄する
         session.removeAttribute("sessionAnser");
