@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hello.mapper.VoteMapper">
-    <insert id="voteAnswer" parameterType="com.example.hello.entity.Vote">
+    <insert id="voteAnswer" parameterType="com.example.hello.bean.Vote">
         INSERT INTO vote(theme_id,user_name,answer_id) VALUES (#{themeId},#{userName},#{answerId});
     </insert>
 </mapper>

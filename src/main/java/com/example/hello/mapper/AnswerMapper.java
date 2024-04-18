@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.hello.entity.Answer;
+import com.example.hello.bean.Answer;
 
 @Mapper
 public interface AnswerMapper {

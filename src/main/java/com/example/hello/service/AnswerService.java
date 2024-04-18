@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.hello.entity.Answer;
+import com.example.hello.bean.Answer;
 import com.example.hello.mapper.AnswerMapper;
 
 @Service
@@ -25,4 +25,5 @@ public class AnswerService {
     public Answer getAnswer(Integer answerId){
         return answerMapper.getAnswer(answerId);
     }
+
 }

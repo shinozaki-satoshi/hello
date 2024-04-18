@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.hello.entity.Account;
+import com.example.hello.bean.Account;
 import com.example.hello.service.UserService;
 
 @Controller

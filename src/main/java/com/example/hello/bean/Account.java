@@ -1,4 +1,4 @@
-package com.example.hello.entity;
+package com.example.hello.bean;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;

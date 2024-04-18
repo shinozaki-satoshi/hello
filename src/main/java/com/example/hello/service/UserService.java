@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.hello.entity.Account;
+import com.example.hello.bean.Account;
 import com.example.hello.mapper.AccountMapper;
 
 import org.springframework.ui.Model;

@@ -2,9 +2,11 @@ package com.example.hello;
 
 import java.util.List;
 
-import com.example.hello.entity.Answer;
-import com.example.hello.entity.Theme;
+import com.example.hello.bean.Answer;
+import com.example.hello.bean.ResultVote;
+import com.example.hello.bean.Theme;
 import com.example.hello.service.AnswerService;
+import com.example.hello.service.ResultVoteService;
 import com.example.hello.service.ThemeService;
 import com.example.hello.service.UserService;
 import com.example.hello.service.VoteService;
@@ -35,6 +37,9 @@ public class HelloApplicationController {
     @Autowired
     VoteService VoteService;
 
+    @Autowired
+    ResultVoteService ResultVoteService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(HttpSession session,Model model) {
         //ユーザーセット
@@ -55,13 +60,43 @@ public class HelloApplicationController {
         //ユーザーセット
         UserService.getUser(model);
 
+        // 期限内のレコードを取得
         List<Theme> themes = ThemeService.getAllTheme();
         model.addAttribute("themes", themes);
 
         // セッションを破棄する
-        //session.invalidate();
+        session.removeAttribute("sessionAnser");
 
         return "home";
+    }
+
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public String result(HttpSession session, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
+        // 期限外のレコードを取得
+        List<Theme> themesOver = ThemeService.getOverTheme();
+        model.addAttribute("themesOvers", themesOver);
+
+        // セッションを破棄する
+        session.removeAttribute("sessionAnser");
+
+        return "result";
+    }
+
+    @RequestMapping(value = "/result_vote/{themeId}", method = RequestMethod.GET)
+    public String result_vote(HttpSession session, Model model, @PathVariable("themeId") String themeId) {
+        //ユーザーセット
+        UserService.getUser(model);
+
+        List<ResultVote> answers = ResultVoteService.getAnswersRank(Integer.parseInt(themeId));
+        model.addAttribute("answers", answers);
+
+        Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
+        model.addAttribute("theme", theme);
+
+        return "result_vote";
     }
 
     /* 
