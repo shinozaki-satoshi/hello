@@ -147,8 +147,11 @@ public class HelloApplicationController {
         //ユーザーセット
         UserService.getUser(model);
 
+        // ユーザー取得
+        String userName = UserService.getUserName();
+
         // 回答登録
-        AnswerService.registerAnswer(Integer.parseInt(themeId), sessionAnser);
+        AnswerService.registerAnswer(Integer.parseInt(themeId), sessionAnser,userName);
 
         // セッションを破棄する
         session.removeAttribute("sessionAnser");

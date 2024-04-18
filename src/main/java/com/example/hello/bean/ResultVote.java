@@ -10,5 +10,6 @@ public class ResultVote {
     private String themeId;
     private String answer;
     private String voteCount;
+    private String userName;
     private String time;
 }

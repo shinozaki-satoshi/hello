@@ -14,8 +14,8 @@ public class AnswerService {
     @Autowired
     AnswerMapper answerMapper;
 
-    public Void registerAnswer(Integer themeId, String answer){
-        return answerMapper.registerTheme(themeId, answer);
+    public Void registerAnswer(Integer themeId, String answer, String userName){
+        return answerMapper.registerAnswer(themeId, answer, userName);
     }
 
     public List<Answer> getAnswers(Integer themeId){

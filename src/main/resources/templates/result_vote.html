@@ -24,13 +24,16 @@
             <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
         </section>
     </div>
-
+    
     <!-- 回答を表示する -->
-    <ul class="list-group" th:each="answerA : ${answers}">
+    <ul class="list-group" th:each="answerA, answerA_index : ${answers}">
         <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+            <!-- 一番目の項目のみ画像を表示 -->
+            <img th:if="${answerA_index.index == 0}" th:src="@{/images/rank1.png}" alt="画像" width="100" height="100">
             <h2 th:text="${answerA.answer}">回答</h2>
             <p th:text="'回答日：' + ${answerA.time}">回答日</p>
             <p th:text="'投票数：' + ${answerA.voteCount}">投票数</p>
+            <p th:text="'ユーザー名：' + ${answerA.userName}">ユーザー名</p>
         </li>
     </ul>
 

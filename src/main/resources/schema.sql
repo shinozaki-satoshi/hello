@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS vote;
+DROP TABLE IF EXISTS answer;
 
 DROP TABLE IF EXISTS Theme;
 CREATE TABLE Theme (
@@ -8,23 +9,23 @@ CREATE TABLE Theme (
   deadline_to DATE NOT NULL
 );
 
-DROP TABLE IF EXISTS answer;
+DROP TABLE IF EXISTS account;
+CREATE TABLE account (
+ user_name VARCHAR(20) NOT NULL,
+ pass_word VARCHAR(100) NOT NULL,
+ PRIMARY KEY (user_name)
+);
+
 CREATE TABLE answer (
   answer_id SERIAL NOT NULL,
   answer TEXT NOT NULL,
   time TIMESTAMP(6) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   theme_id INTEGER,
-  user_id INTEGER, -- ユーザーID列を追加
-  PRIMARY KEY (answer_id)
+  user_name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (answer_id),
+  FOREIGN KEY (theme_id) REFERENCES Theme(theme_id),
+  FOREIGN KEY (user_name) REFERENCES account(user_name)
 );
-
-DROP TABLE IF EXISTS account;
-CREATE TABLE account (
- user_name VARCHAR(20) NOT NULL
- , pass_word VARCHAR(100) NOT NULL
- , primary key (user_name)
-);
-
 
 CREATE TABLE vote (
   user_name VARCHAR(20),

@@ -12,4 +12,7 @@
     <select id="getOverTheme" resultType="com.example.hello.bean.Theme">
         SELECT * FROM Theme WHERE deadline_to &lt;= NOW() ORDER BY deadline_to DESC;
     </select>
+    <select id="registerTheme" resultType="com.example.hello.bean.Answer">
+        INSERT INTO answer(answer,vote_num,time,theme_id) VALUES (#{answer},0,CURRENT_TIMESTAMP,#{themeId});
+    </select>
 </mapper>
