@@ -5,21 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.hello.entity.Answer;
+import com.example.hello.bean.Answer;
 import com.example.hello.mapper.AnswerMapper;
 
 @Service
 public class AnswerService {
-
-    private final AnswerMapper answerMapper;
-
+    
     @Autowired
-    public AnswerService(AnswerMapper answerMapper) {
-        this.answerMapper = answerMapper;
-    }
+    AnswerMapper answerMapper;
 
-    public Void registerAnswer(Integer themeId, String answer){
-        return answerMapper.registerTheme(themeId, answer);
+    public Void registerAnswer(Integer themeId, String answer, String userName){
+        return answerMapper.registerAnswer(themeId, answer, userName);
     }
 
     public List<Answer> getAnswers(Integer themeId){
@@ -30,9 +26,4 @@ public class AnswerService {
         return answerMapper.getAnswer(answerId);
     }
 
-    public Void voteAnswer(Integer answerId){
-        return answerMapper.voteAnswer(answerId);
-    }
-    
-    
 }

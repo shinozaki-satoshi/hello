@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hello.mapper.ResultVoteMapper">
+    <select id="getAnswersRank" resultType="com.example.hello.bean.ResultVote">
+        SELECT a.*, COALESCE(v.vote_count, 0) AS vote_count
+        FROM answer a
+        LEFT JOIN (
+            SELECT answer_id, COUNT(*) AS vote_count
+            FROM vote
+            WHERE theme_id = #{themeId}
+            GROUP BY answer_id
+        ) v ON a.answer_id = v.answer_id
+        WHERE a.theme_id = #{themeId}
+        ORDER BY COALESCE(v.vote_count, 0) DESC;
+    </select>
+</mapper>

@@ -2,16 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hello.mapper.AnswerMapper">
-    <select id="registerTheme" resultType="com.example.hello.entity.Answer">
-        INSERT INTO answer(answer,vote_num,time,theme_id) VALUES (#{answer},0,CURRENT_TIMESTAMP,#{themeId});
+    <select id="registerAnswer" resultType="com.example.hello.bean.Answer">
+        INSERT INTO answer(answer,user_name,time,theme_id) VALUES (#{answer},#{userName},CURRENT_TIMESTAMP,#{themeId});
     </select>
-    <select id="getAnswers" resultType="com.example.hello.entity.Answer">
+    <select id="getAnswers" resultType="com.example.hello.bean.Answer">
         SELECT * FROM answer WHERE theme_id = #{themeId};
     </select>
-    <select id="getAnswer" resultType="com.example.hello.entity.Answer">
+    <select id="getAnswer" resultType="com.example.hello.bean.Answer">
         SELECT * FROM answer WHERE answer_id = #{answerId};
     </select>
-    <select id="voteAnswer" resultType="com.example.hello.entity.Answer">
-        UPDATE answer SET vote_num = vote_num + 1 WHERE answer_id = #{answerId};
-    </select>
+
 </mapper>

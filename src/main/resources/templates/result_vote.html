@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/header::head(~{::title})}">
+    <title>大喜利</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <header th:replace="~{layout/header::header}"></header>
+    <div  style="margin-top: 80px;">
+        <h1>結果画面</h1>
+    </div>
+    <div>
+        <!-- テーマを表示する -->
+        <section style="border: #ff69b4 solid 5px; font-size: 100%; padding: 15px;">
+            <h2 th:text="${theme.themeName}">お題</h2>
+            <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
+        </section>
+    </div>
+    
+    <!-- 回答を表示する -->
+    <ul class="list-group" th:each="answerA, answerA_index : ${answers}">
+        <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+            <!-- 一番目の項目のみ画像を表示 -->
+            <img th:if="${answerA_index.index == 0}" th:src="@{/images/rank1.png}" alt="画像" width="100" height="100">
+            <h2 th:text="${answerA.answer}">回答</h2>
+            <p th:text="'回答日：' + ${answerA.time}">回答日</p>
+            <p th:text="'投票数：' + ${answerA.voteCount}">投票数</p>
+            <p th:text="'ユーザー名：' + ${answerA.userName}">ユーザー名</p>
+        </li>
+    </ul>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <footer th:replace="~{layout/footer::footer}"></footer>
+</body>
+
+</html>

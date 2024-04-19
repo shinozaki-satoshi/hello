@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.hello.entity.Account;
+import com.example.hello.bean.Account;
 import com.example.hello.mapper.AccountMapper;
 
 import org.springframework.ui.Model;
@@ -42,4 +42,10 @@ public class UserService implements UserDetailsService{
         model.addAttribute("username", name);
         return model;
     }
+
+    public String getUserName(){
+        final String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return name;
+    }
+
 }

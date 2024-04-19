@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.hello.entity.Answer;
+import com.example.hello.bean.Answer;
 
 @Mapper
 public interface AnswerMapper {
-    Void registerTheme(Integer themeId, String answer);
+    Void registerAnswer(Integer themeId, String answer,String userName);
     List<Answer> getAnswers(Integer themeId);
     Answer getAnswer (Integer answerId);
-    Void voteAnswer(Integer answerId);
 }

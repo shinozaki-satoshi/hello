@@ -2,7 +2,7 @@ package com.example.hello.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.hello.entity.Account;
+import com.example.hello.bean.Account;
 
 @Mapper
 public interface AccountMapper {

@@ -1,12 +1,14 @@
-package com.example.hello.entity;
+package com.example.hello.bean;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @AllArgsConstructor
+@Data
 public class Account implements UserDetails{
 
     private String userName;

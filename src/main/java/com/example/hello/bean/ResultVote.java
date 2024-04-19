@@ -1,14 +1,15 @@
-package com.example.hello.entity;
+package com.example.hello.bean;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
 @AllArgsConstructor
-public class Answer {
-
+@Data
+public class ResultVote {
     private String answerId;
     private String themeId;
     private String answer;
-    private String voteNum;
+    private String voteCount;
+    private String userName;
     private String time;
 }
