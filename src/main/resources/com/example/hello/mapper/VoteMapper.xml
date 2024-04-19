@@ -5,4 +5,13 @@
     <insert id="voteAnswer" parameterType="com.example.hello.bean.Vote">
         INSERT INTO vote(theme_id,user_name,answer_id) VALUES (#{themeId},#{userName},#{answerId});
     </insert>
+    <select id="voteCheck" resultType="com.example.hello.bean.Vote">
+        SELECT * FROM vote WHERE user_name=#{userName} and theme_id=#{themeId};
+    </select>
+    <select id="voteCheckbyUser" resultType="com.example.hello.bean.Vote">
+        SELECT * FROM vote WHERE user_name=#{userName};
+    </select>
+    <delete id="votedelete" parameterType="com.example.hello.bean.Vote">
+        DELETE FROM vote WHERE theme_id = #{themeId} AND user_name = #{userName};
+    </delete>
 </mapper>

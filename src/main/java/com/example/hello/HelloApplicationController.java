@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.hello.bean.Answer;
 import com.example.hello.bean.ResultVote;
 import com.example.hello.bean.Theme;
+import com.example.hello.bean.Vote;
 import com.example.hello.service.AnswerService;
 import com.example.hello.service.ResultVoteService;
 import com.example.hello.service.ThemeService;
@@ -60,12 +61,32 @@ public class HelloApplicationController {
         //ユーザーセット
         UserService.getUser(model);
 
+        //ユーザー名
+        String userName = UserService.getUserName();
+
         // 期限内のレコードを取得
         List<Theme> themes = ThemeService.getAllTheme();
         model.addAttribute("themes", themes);
 
+        //投票済みチェック
+        List<Vote> voteList = VoteService.voteCheck(userName);
+        List<Integer> voteIntegerList = new java.util.ArrayList<>(); 
+        for (Vote vote : voteList) {
+            voteIntegerList.add(vote.getThemeId());
+        }
+        model.addAttribute("voteIntegerList", voteIntegerList);
+
+        //回答済みチェック
+        List<Answer> answerList = AnswerService.answerCheck(userName);
+        List<Integer> answerIntegerList = new java.util.ArrayList<>(); 
+        for (Answer answer : answerList) {
+            answerIntegerList.add(answer.getThemeId());
+        }
+        model.addAttribute("answerIntegerList", answerIntegerList);
+
         // セッションを破棄する
         session.removeAttribute("sessionAnser");
+        session.removeAttribute("sessiontheme");
 
         return "home";
     }
@@ -169,11 +190,20 @@ public class HelloApplicationController {
         //ユーザーセット
         UserService.getUser(model);
 
+        // ユーザー取得
+        String userName = UserService.getUserName();
+
         Theme theme = ThemeService.getTheme(Integer.parseInt(themeId));
         model.addAttribute("theme", theme);
 
         List<Answer> answers = AnswerService.getAnswers(Integer.parseInt(themeId));
         model.addAttribute("answers", answers);
+
+        System.out.println("tesuto"+userName+themeId);
+
+        //投票済みチェック
+        Vote vote = VoteService.voteCheck(userName, Integer.parseInt(themeId));
+        model.addAttribute("vote", vote);
 
         return "vote";
     }
@@ -186,7 +216,7 @@ public class HelloApplicationController {
         Answer answer = AnswerService.getAnswer(Integer.parseInt(answerId));
         model.addAttribute("answer", answer);
 
-        Theme theme = ThemeService.getTheme(Integer.parseInt(answer.getThemeId()));
+        Theme theme = ThemeService.getTheme(answer.getThemeId());
         model.addAttribute("theme", theme);
         return "vote_confirm";
     }
@@ -203,18 +233,104 @@ public class HelloApplicationController {
         Integer answerIdInt = Integer.parseInt(answerId);
         
         // 投票テーマID取得
-        Integer themeIdInt = Integer.parseInt(AnswerService.getAnswer(answerIdInt).getThemeId());
+        Integer themeIdInt = AnswerService.getAnswer(answerIdInt).getThemeId();
 
         // 投票登録(ユーザ、テーマ、アンサーID)
         VoteService.voteAnswer(userName,themeIdInt,answerIdInt);
 
-        // セッションを破棄する
-        session.removeAttribute("sessionAnser");
-
         return "finish";
     }
 
+    @RequestMapping(value = "/editVote_confirm/{answerId}", method = RequestMethod.GET)
+    public String editVote_confirm(HttpSession session, @PathVariable("answerId") String answerId, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
+        Answer answer = AnswerService.getAnswer(Integer.parseInt(answerId));
+        model.addAttribute("answer", answer);
+
+        Theme theme = ThemeService.getTheme(answer.getThemeId());
+        model.addAttribute("theme", theme);
+        return "editVote_confirm";
+    }
+
+    @RequestMapping(value = "/editVote_finish/{answerId}", method = RequestMethod.POST)
+    public String editVote_finish(HttpSession session, @PathVariable("answerId") String answerId, Model model) {
+        //ユーザーセット
+        UserService.getUser(model);
+
+        // ユーザー取得
+        String userName = UserService.getUserName();
+
+        // 回答ID取得
+        Integer answerIdInt = Integer.parseInt(answerId);
+        
+        // 投票テーマID取得
+        Integer themeIdInt = AnswerService.getAnswer(answerIdInt).getThemeId();
+
+        // 現在の投票を削除する
+        VoteService.votedelete(userName,themeIdInt);
+
+        // 投票登録(ユーザ、テーマ、アンサーID)
+        VoteService.voteAnswer(userName,themeIdInt,answerIdInt);
+
+        return "finish";
+    }
     /* 
      /投票画面群 
+    */
+
+    /* 
+     お題追加画面群 
+    */
+    @RequestMapping(value = "/addTheme", method = RequestMethod.GET)
+    public String addTheme(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
+
+        //戻るボタン時に格納
+        Theme theme = (Theme) session.getAttribute("sessiontheme");
+        model.addAttribute("theme", theme); 
+
+        return "addTheme";
+    }
+    
+    @RequestMapping(value = "/addTheme_confirm", method = RequestMethod.POST)
+    public String addTheme_confirm(HttpSession session, Model model, Theme theme) {
+        //ユーザーセット
+        UserService.getUser(model);
+        
+        model.addAttribute("theme", theme);
+        session.setAttribute("sessiontheme", theme);
+        return "addTheme_confirm";
+    }
+
+    @RequestMapping(value = "/addTheme_back", method = RequestMethod.GET)
+    public String addTheme_back(HttpSession session, Model model) {
+
+
+        return "redirect:/addTheme";
+    }
+
+    @RequestMapping(value = "/addTheme_finish", method = RequestMethod.POST)
+    public String addTheme_finish(HttpSession session, Model model) {
+        Theme theme = (Theme) session.getAttribute("sessiontheme");
+        //ユーザーセット
+        UserService.getUser(model);
+
+        // ユーザー取得
+        String userName = UserService.getUserName();
+        theme.setUserName(userName);
+
+        // お題登録
+        ThemeService.registerTheme(theme);
+
+        // セッションを破棄する
+        session.removeAttribute("sessiontheme");
+        return "finish";
+    }
+    /* 
+     /お題追加画面群
     */
 }

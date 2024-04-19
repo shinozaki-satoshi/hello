@@ -22,11 +22,13 @@ public class ThemeService {
         return themeMapper.getTheme(themeId);
     }
     
-    public Void registerTheme(Integer themeId, String answer){
-        return themeMapper.registerTheme(themeId, answer);
+    public void registerTheme(Theme theme){
+        System.out.println("ser"+theme);
+        themeMapper.registerTheme(theme);
     }
 
     public List<Theme> getOverTheme(){
         return themeMapper.getOverTheme();
     }
+
 }

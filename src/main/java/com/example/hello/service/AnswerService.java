@@ -26,4 +26,8 @@ public class AnswerService {
         return answerMapper.getAnswer(answerId);
     }
 
+    public List<Answer> answerCheck(String userName){
+        return answerMapper.answerCheck(userName);
+    }
+
 }

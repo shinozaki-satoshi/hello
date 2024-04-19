@@ -11,5 +11,8 @@
     <select id="getAnswer" resultType="com.example.hello.bean.Answer">
         SELECT * FROM answer WHERE answer_id = #{answerId};
     </select>
+    <select id="answerCheck" resultType="com.example.hello.bean.Answer">
+        SELECT * FROM answer WHERE user_name=#{userName};
+    </select>
 
 </mapper>

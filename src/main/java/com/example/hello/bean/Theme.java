@@ -1,4 +1,6 @@
 package com.example.hello.bean;
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -6,11 +8,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class Theme {
 
-    private String themeId;
+    private Integer themeId;
 
     private String themeName;
 
-    private String deadlineFrom;
+    private Date deadlineFrom;
 
-    private String deadlineTo;
+    private Date deadlineTo;
+    private String userName;
 }

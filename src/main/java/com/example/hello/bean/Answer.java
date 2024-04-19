@@ -6,9 +6,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class Answer {
 
-    private String answerId;
-    private String themeId;
+    private Integer answerId;
     private String answer;
-    private String userName;
     private String time;
+    private Integer themeId;
+    private String userName;
 }
