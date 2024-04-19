@@ -61,9 +61,28 @@ public class HelloApplicationController {
         //ユーザーセット
         UserService.getUser(model);
 
+        //ユーザー名
+        String userName = UserService.getUserName();
+
         // 期限内のレコードを取得
         List<Theme> themes = ThemeService.getAllTheme();
         model.addAttribute("themes", themes);
+
+        //投票済みチェック
+        List<Vote> voteList = VoteService.voteCheck(userName);
+        List<Integer> voteIntegerList = new java.util.ArrayList<>(); 
+        for (Vote vote : voteList) {
+            voteIntegerList.add(vote.getThemeId());
+        }
+        model.addAttribute("voteIntegerList", voteIntegerList);
+
+        //回答済みチェック
+        List<Answer> answerList = AnswerService.answerCheck(userName);
+        List<Integer> answerIntegerList = new java.util.ArrayList<>(); 
+        for (Answer answer : answerList) {
+            answerIntegerList.add(answer.getThemeId());
+        }
+        model.addAttribute("answerIntegerList", answerIntegerList);
 
         // セッションを破棄する
         session.removeAttribute("sessionAnser");
@@ -184,7 +203,6 @@ public class HelloApplicationController {
 
         //投票済みチェック
         Vote vote = VoteService.voteCheck(userName, Integer.parseInt(themeId));
-        System.out.println("投票済み"+vote);
         model.addAttribute("vote", vote);
 
         return "vote";
@@ -198,7 +216,7 @@ public class HelloApplicationController {
         Answer answer = AnswerService.getAnswer(Integer.parseInt(answerId));
         model.addAttribute("answer", answer);
 
-        Theme theme = ThemeService.getTheme(Integer.parseInt(answer.getThemeId()));
+        Theme theme = ThemeService.getTheme(answer.getThemeId());
         model.addAttribute("theme", theme);
         return "vote_confirm";
     }
@@ -215,7 +233,7 @@ public class HelloApplicationController {
         Integer answerIdInt = Integer.parseInt(answerId);
         
         // 投票テーマID取得
-        Integer themeIdInt = Integer.parseInt(AnswerService.getAnswer(answerIdInt).getThemeId());
+        Integer themeIdInt = AnswerService.getAnswer(answerIdInt).getThemeId();
 
         // 投票登録(ユーザ、テーマ、アンサーID)
         VoteService.voteAnswer(userName,themeIdInt,answerIdInt);
@@ -231,7 +249,7 @@ public class HelloApplicationController {
         Answer answer = AnswerService.getAnswer(Integer.parseInt(answerId));
         model.addAttribute("answer", answer);
 
-        Theme theme = ThemeService.getTheme(Integer.parseInt(answer.getThemeId()));
+        Theme theme = ThemeService.getTheme(answer.getThemeId());
         model.addAttribute("theme", theme);
         return "editVote_confirm";
     }
@@ -248,7 +266,7 @@ public class HelloApplicationController {
         Integer answerIdInt = Integer.parseInt(answerId);
         
         // 投票テーマID取得
-        Integer themeIdInt = Integer.parseInt(AnswerService.getAnswer(answerIdInt).getThemeId());
+        Integer themeIdInt = AnswerService.getAnswer(answerIdInt).getThemeId();
 
         // 現在の投票を削除する
         VoteService.votedelete(userName,themeIdInt);

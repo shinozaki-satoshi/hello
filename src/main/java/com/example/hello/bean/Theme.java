@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Theme {
 
-    private String themeId;
+    private Integer themeId;
 
     private String themeName;
 

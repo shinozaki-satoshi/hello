@@ -7,8 +7,8 @@ import lombok.Data;
 public class Answer {
 
     private Integer answerId;
-    private String themeId;
     private String answer;
-    private String userName;
     private String time;
+    private Integer themeId;
+    private String userName;
 }

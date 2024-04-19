@@ -21,15 +21,37 @@
         <li class="list-group-item" style="border: #ff69b4 solid 1px; font-size: 100%; padding: 15px;">
             <h2 th:text="${theme.themeName}">お題</h2>
             <p th:text="'受付期限：' + ${theme.deadlineTo}">受付期限</p>
-            <a th:href="@{'/answer/' + ${theme.themeId}}">
-                <button>回答する</button>
+    
+            <!-- 回答ボタン -->
+            <button th:if="${answerIntegerList != null && answerIntegerList.contains(theme.themeId)}"
+                    class="btn btn-secondary">回答済み</button>
+            <a th:if="${answerIntegerList != null && !answerIntegerList.contains(theme.themeId)}"
+               th:href="@{'/answer/' + ${theme.themeId}}">
+                <button class="btn btn-success">回答する</button>
             </a>
-            <a th:href="@{'/vote/' + ${theme.themeId}}">
-                <button>閲覧する</button>
+    
+            <!-- 投票ボタン -->
+            <a th:if="${voteIntegerList != null && voteIntegerList.contains(theme.themeId)}"
+               th:href="@{'/vote/' + ${theme.themeId}}">
+                <button class="btn btn-primary">閲覧する</button>
             </a>
-
+            <a th:if="${voteIntegerList != null && !voteIntegerList.contains(theme.themeId)}"
+               th:href="@{'/vote/' + ${theme.themeId}}">
+                <button class="btn btn-success">投票する</button>
+            </a>
+    
+            <!-- 回答、投票リストがnullの場合のデフォルトボタン -->
+            <a th:if="${answerIntegerList == null}"
+               th:href="@{'/answer/' + ${theme.themeId}}">
+                <button class="btn btn-success">回答する</button>
+            </a>
+            <a th:if="${voteIntegerList == null}"
+               th:href="@{'/vote/' + ${theme.themeId}}">
+                <button class="btn btn-success">投票する</button>
+            </a>
         </li>
     </ul>
+    
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
