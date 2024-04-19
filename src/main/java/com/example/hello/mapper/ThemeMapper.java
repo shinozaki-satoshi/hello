@@ -11,6 +11,6 @@ public interface ThemeMapper {
 
     List<Theme> getAllTheme();
     Theme getTheme(Integer themeId);
-    Void registerTheme(Integer themeId, String anser);
+    void registerTheme(Theme theme);
     List<Theme> getOverTheme();
 }

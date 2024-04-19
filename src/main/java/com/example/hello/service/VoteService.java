@@ -14,7 +14,16 @@ public class VoteService {
 
     public void voteAnswer(String userName, Integer themeId, Integer answerId){
 
-        Vote vote = new Vote(themeId,userName,answerId);
+        Vote vote = new Vote(userName,themeId,answerId);
         voteMapper.voteAnswer(vote);
+    }
+
+    public Vote voteCheck(String userName, Integer themeId){
+
+        return voteMapper.voteCheck(userName,themeId);
+    }
+
+    public void votedelete(String userName, Integer themeId){
+        voteMapper.votedelete(userName,themeId);
     }
 }

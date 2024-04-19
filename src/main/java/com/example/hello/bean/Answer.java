@@ -6,7 +6,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Answer {
 
-    private String answerId;
+    private Integer answerId;
     private String themeId;
     private String answer;
     private String userName;

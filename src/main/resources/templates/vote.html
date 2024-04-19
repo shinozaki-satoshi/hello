@@ -26,15 +26,37 @@
     </div>
 
     <!-- 回答を表示する -->
-    <ul class="list-group" th:each="answerA : ${answers}">
-        <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
-            <h2 th:text="${answerA.answer}">回答</h2>
-            <p th:text="'回答日：' + ${answerA.time}">回答日</p>
-            <a th:href="@{'/vote_confirm/' + ${answerA.answerId}}">
-                <button>投票する</button>
-            </a>
-        </li>
-    </ul>
+    <div th:if="${vote == null}">
+        <ul class="list-group" th:each="answerA : ${answers}">
+            <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+                <!-- 投票済みの時のみ画像表示 -->
+                <div th:unless="${vote == null}">
+                    <img th:if="${answerA.answerId == vote.answerId}" th:src="@{/images/zumi.png}" alt="画像" width="100" height="100">
+                </div>
+                <h2 th:text="${answerA.answer}">回答</h2>
+                <p th:text="'回答日：' + ${answerA.time}">回答日</p>
+                <a th:href="@{'/vote_confirm/' + ${answerA.answerId}}">
+                    <button>投票する</button>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 投票済みの時表示 -->
+    <div th:unless="${vote == null}">
+        <ul class="list-group" th:each="answerA : ${answers}">
+            <li class="list-group-item" style="border: #04aa4f solid 1px; font-size: 100%; padding: 15px;">
+                <img th:if="${answerA.answerId == vote.answerId}" th:src="@{/images/zumi.png}" alt="画像" width="100" height="100">
+                <h2 th:text="${answerA.answer}">回答</h2>
+                <p th:text="'回答日：' + ${answerA.time}">回答日</p>
+                <a th:href="@{'/editVote_confirm/' + ${answerA.answerId}}">
+                    <button>変更する</button>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
