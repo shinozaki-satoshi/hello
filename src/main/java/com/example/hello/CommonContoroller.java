@@ -1,7 +1,9 @@
 package com.example.hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,9 +29,16 @@ public class CommonContoroller {
 	}
 
 	@RequestMapping(value = "/registUserSuc", method = RequestMethod.POST)
-	public String registUserSuc(Account account) {
-		//ここで登録
-		UserService.registUser(account.getUsername(),account.getPassword());
-		return "login";
+	public String registUserSuc(Model model,Account account) {
+		try {
+            // ユーザーの登録を試みる
+            UserService.registUser(account.getUsername(), account.getPassword());
+            return "login";
+        } catch (DataIntegrityViolationException e) {
+            // ユーザーの登録に失敗した場合の処理
+			String errorMessage ="ユーザの登録に失敗しました。存在するユーザ名です。";
+			model.addAttribute("errorMessage", errorMessage);
+			return "registUser"; 
+        }
 	}
 }
