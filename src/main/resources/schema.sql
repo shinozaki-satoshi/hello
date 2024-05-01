@@ -27,8 +27,7 @@ CREATE TABLE answer (
   theme_id INTEGER,
   user_name VARCHAR(20) NOT NULL,
   PRIMARY KEY (answer_id),
-  FOREIGN KEY (theme_id) REFERENCES Theme(theme_id),
-  FOREIGN KEY (user_name) REFERENCES account(user_name)
+  FOREIGN KEY (theme_id) REFERENCES Theme(theme_id)
 );
 
 CREATE TABLE vote (
