@@ -1,6 +1,6 @@
 INSERT INTO  account (user_name, pass_word) VALUES 
   ('admin', '$2a$10$ofWs8hg7XAHd6QPT1H1SEuWy8r8TDbic0UFY5bTfJZlla4XHahfSW'),
-  ('guest','$2a$10$QgyKc0oBM2mrihXdUBsRhOA5gSeDSPyHqZ.tqRuNE2H4F7EF0b21e');
+  ('guest','$2a$10$u.9FjTWyzELFhTHQFHvq9.keebo3VU/SXe7b05YLrs0LHsdI28k5y');
 
 INSERT INTO Theme (theme_name, deadline_from, deadline_to,user_name) VALUES
 ('こんな法律はマッチョだ', '2024-04-01', '2024-04-15', 'admin'),
