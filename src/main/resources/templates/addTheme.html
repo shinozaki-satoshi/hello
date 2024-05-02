@@ -10,6 +10,22 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script>
+            var vue = new Vue ({
+                el: '#app',
+                data: {
+                    today: ''
+                },
+                created: function(){
+                    // 当日の日付を取得し、yyyy-mm-dd形式に変換
+                    var currentDate = new Date();
+                    var year = currentDate.getFullYear();
+                    var month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // 0が埋められた二桁の月
+                    var day = ('0' + currentDate.getDate()).slice(-2); // 0が埋められた二桁の日
+                    this.today = year + '-' + month + '-' + day;
+                }
+            })
+        </script>
 </head>
 
 <body>
@@ -38,9 +54,9 @@
                     <div th:unless="${theme == null}">
                         <input type="text" class="form-control" name="themeName" placeholder="お題" th:value="${theme.themeName}" required>
                         <label for="deadlineFrom">回答期限 :</label>
-                        <input type="date" id="deadlineFrom" name="deadlineFrom" th:value="${theme.deadlineFrom}" required>
+                        <input type="date" id="deadlineFrom" name="deadlineFrom" th:value="${theme.deadlineFrom}" required v-bind:min="today" >
                         <label for="deadlineTo">～</label>
-                        <input type="date" id="deadlineTo" name="deadlineTo" th:value="${theme.deadlineTo}" required>
+                        <input type="date" id="deadlineTo" name="deadlineTo" th:value="${theme.deadlineTo}" required v-bind:min="today">
                     </div>
                     
                     
@@ -61,6 +77,41 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
+        <script>
+            // 当日の日付を取得
+            var today = new Date();
+            // deadlineFromのinput要素を取得
+            var deadlineFromInput = document.getElementById("deadlineFrom");
+            // deadlineToのinput要素を取得
+            var deadlineToInput = document.getElementById("deadlineTo");
+    
+            // deadlineFromに当日の日付を設定
+            deadlineFromInput.valueAsDate = today;
+    
+            // deadlineToに当日の翌日の日付を設定
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            deadlineToInput.valueAsDate = tomorrow;
+
+            // deadlineFromの値が変更された時の処理
+            deadlineFromInput.addEventListener("change", function () {
+                // deadlineFromの日付を取得
+                var deadlineFromDate = new Date(this.value);
+                // deadlineToにdeadlineFrom以降の日付を設定
+                deadlineToInput.min = this.value; // deadlineFromの値を最小値とする
+    
+                // 現在の日付より過去の日付を選択した場合、deadlineFromを現在の日付にする
+                if (deadlineFromDate < today) {
+                    deadlineFromInput.valueAsDate = today;
+                    deadlineToInput.min = today.toISOString().split('T')[0];
+                }
+    
+                // deadlineToの値がdeadlineFromより前の場合、deadlineToをdeadlineFromと同じにする
+                if (new Date(deadlineToInput.value) < deadlineFromDate) {
+                    deadlineToInput.valueAsDate = deadlineFromDate;
+                }
+            });
+        </script>
     <footer th:replace="~{layout/footer::footer}"></footer>
 </body>
 
