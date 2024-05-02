@@ -6,11 +6,36 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ログイン</title>
 
-
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+	<script>
+		window.onload = function() {
+			// ユーザーIDの入力フィールドに制限をかける
+			var userIdInput = document.getElementById('username');
+			userIdInput.addEventListener('input', function() {
+				var restrictedCharacters = /[^a-zA-Z0-9_]/g; // 使用可能な文字の正規表現
+				if (restrictedCharacters.test(this.value)) {
+					this.setCustomValidity("使用できない文字が含まれています。"); // エラーメッセージを設定
+				} else {
+					this.setCustomValidity(""); // エラーメッセージをクリア
+				}
+			});
+		
+			// パスワードの入力フィールドに制限をかける
+			var passwordInput = document.getElementById('password');
+			passwordInput.addEventListener('input', function() {
+				var restrictedCharacters = /[^a-zA-Z0-9_!@#$%^&*()-+=]/g; // 使用可能な文字の正規表現
+				if (restrictedCharacters.test(this.value)) {
+					this.setCustomValidity("使用できない文字が含まれています。"); // エラーメッセージを設定
+				} else {
+					this.setCustomValidity(""); // エラーメッセージをクリア
+				}
+			});
+		};
+		</script>
 </head>
 
 <body class="bg-light">
@@ -20,6 +45,7 @@
             <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
                 th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
                 ログインエラーメッセージ</p>
+			<p th:if="${errorMessage}" style="color: red;">エラー: <span th:text="${errorMessage}"></span></p>
 		<div class="container my-1">
 			    <div class="row m-3">
 			    	<div class="col-md-3"></div>

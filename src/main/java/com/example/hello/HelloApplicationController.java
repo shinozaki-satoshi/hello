@@ -1,5 +1,7 @@
 package com.example.hello;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.example.hello.bean.Answer;
@@ -171,6 +173,16 @@ public class HelloApplicationController {
         // ユーザー取得
         String userName = UserService.getUserName();
 
+        // ゲストユーザは何度も回答可能にする処理
+        if ("guest".equals(userName)) {
+        // Get current date and time
+        LocalDateTime now = LocalDateTime.now();
+        // Format the date and time
+        String timestamp = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        // Append formatted timestamp to "guest" username
+        userName = "guest_" + timestamp;
+}
+
         // 回答登録
         AnswerService.registerAnswer(Integer.parseInt(themeId), sessionAnser,userName);
 
@@ -198,8 +210,6 @@ public class HelloApplicationController {
 
         List<Answer> answers = AnswerService.getAnswers(Integer.parseInt(themeId));
         model.addAttribute("answers", answers);
-
-        System.out.println("tesuto"+userName+themeId);
 
         //投票済みチェック
         Vote vote = VoteService.voteCheck(userName, Integer.parseInt(themeId));

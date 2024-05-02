@@ -1,5 +1,6 @@
 INSERT INTO  account (user_name, pass_word) VALUES 
-  ('admin', '$2a$10$ofWs8hg7XAHd6QPT1H1SEuWy8r8TDbic0UFY5bTfJZlla4XHahfSW');
+  ('admin', '$2a$10$ofWs8hg7XAHd6QPT1H1SEuWy8r8TDbic0UFY5bTfJZlla4XHahfSW'),
+  ('guest','$2a$10$u.9FjTWyzELFhTHQFHvq9.keebo3VU/SXe7b05YLrs0LHsdI28k5y');
 
 INSERT INTO Theme (theme_name, deadline_from, deadline_to,user_name) VALUES
 ('こんな法律はマッチョだ', '2024-04-01', '2024-04-15', 'admin'),
@@ -10,7 +11,7 @@ INSERT INTO Theme (theme_name, deadline_from, deadline_to,user_name) VALUES
   ('ムキ超ムキ', 1, 'admin','2024-12-31'),
   ('Second answer here', 1, 'admin', '2024-12-31'),
   ('夜勤の人をヨルさんと呼ぶ', 2, 'admin','2024-12-31'),
-   ('Second answer', 2, 'admin','2024-12-31');
+  ('Second answer', 2, 'admin','2024-12-31');
 
 INSERT INTO vote(user_name,theme_id,answer_id,time) VALUES 
     ('admin',1,1,TIMESTAMP '2024-04-17 16:23:45.214'),

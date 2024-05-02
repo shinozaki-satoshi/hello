@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hello.mapper.AnswerMapper">
     <select id="registerAnswer" resultType="com.example.hello.bean.Answer">
-        INSERT INTO answer(answer,user_name,time,theme_id) VALUES (#{answer},#{userName},CURRENT_TIMESTAMP,#{themeId});
+        INSERT INTO answer(answer,user_name,time,theme_id) VALUES (#{answer},#{userName},CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Tokyo',#{themeId});
     </select>
     <select id="getAnswers" resultType="com.example.hello.bean.Answer">
         SELECT * FROM answer WHERE theme_id = #{themeId};
