@@ -23,7 +23,6 @@ public class ThemeService {
     }
     
     public void registerTheme(Theme theme){
-        System.out.println("ser"+theme);
         themeMapper.registerTheme(theme);
     }
 
